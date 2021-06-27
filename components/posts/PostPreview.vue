@@ -1,5 +1,5 @@
 <template>
-  <nuxt-link :to="`/posts/${id}`">
+  <nuxt-link :to="postLink">
     <div class="card">
       <div class="card-image">
         <figure>
@@ -35,6 +35,15 @@ export default {
     thumbnail: {
       type: String,
       required: true
+    },
+    isAdmin: {
+      type: Boolean,
+      required: true
+    }
+  },
+  computed: {
+    postLink () {
+      return this.isAdmin ? `/admin/${this.id}` : `/posts/${this.id}`
     }
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="about-page">
+  <div class="about-page container p-6">
     <h1 class="is-size-4 mb-4 is-uppercase has-text-info">
       This is my absolutely fantastic "About Me" Page!
     </h1>
@@ -13,6 +13,5 @@
 <style scoped>
 .about-page {
   text-align: center;
-  padding: 3rem;
 }
 </style>

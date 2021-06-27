@@ -103,12 +103,12 @@ export default {
 
 .nav-item a:hover,
 .nav-item a:active {
-  color: greenyellow;
+  color: goldenrod;
 }
 
 .nav-item a.nuxt-link-active {
-  background: rgba(172, 255, 47, 0.3);
-  color: greenyellow;
+  background: rgba(218, 165, 32, 0.288);
+  color: goldenrod;
   border-radius: 5px;
 }
 </style>
