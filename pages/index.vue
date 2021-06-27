@@ -1,71 +1,53 @@
 <template>
-  <div class="container">
-    <div>
-      <Logo />
-      <h1 class="title">
-        blog
-      </h1>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
-    </div>
+  <div class="home-page">
+    <h1 class="is-size-2">
+      Get the latest tech news!
+    </h1>
+    <section class="featured-posts">
+      <PostPreview
+        id="1"
+        title="Hello there"
+        preview-text="First post"
+        :thumbnail="'http://placekitten.com/400/300'"
+      />
+      <PostPreview
+        id="2"
+        title="Hello there again"
+        preview-text="Second"
+        :thumbnail="'http://placekitten.com/401/300'"
+      />
+      <PostPreview
+        id="3"
+        title="Bye there"
+        preview-text="My third and final"
+        :thumbnail="'http://placekitten.com/402/300'"
+      />
+    </section>
   </div>
 </template>
 
 <script>
+import PostPreview from '@/components/posts/PostPreview.vue'
+
 export default {
-  data () {
-    return {
-      mojkey: 'mojValue'
-    }
+  components: {
+    PostPreview
   }
+
 }
 </script>
 
-<style>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+<style scoped>
+h1 {
   text-align: center;
+  margin-top: 2rem;
 }
 
-.title {
-  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
+.featured-posts {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 4rem;
 }
 </style>
