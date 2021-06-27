@@ -1,9 +1,11 @@
 <template>
   <div class="home-page">
-    <h1 class="is-size-2">
-      Get the latest tech news!
-    </h1>
-    <section class="featured-posts">
+    <div class="intro">
+      <h1 class="is-size-1">
+        Get the latest tech news!
+      </h1>
+    </div>
+    <section class="featured-posts container">
       <PostPreview
         id="1"
         title="Hello there"
@@ -38,9 +40,15 @@ export default {
 </script>
 
 <style scoped>
+.intro {
+  background: black;
+  padding: 4rem 1rem;
+  background-image: url('~assets/images/cats.jpg');
+  background-position: center;
+}
 h1 {
   text-align: center;
-  margin-top: 2rem;
+  color: white;
 }
 
 .featured-posts {
@@ -49,5 +57,12 @@ h1 {
   justify-content: center;
   gap: 1rem;
   margin-top: 4rem;
+  padding: 1rem 1rem 3rem;
+}
+
+@media only screen and (max-width: 800px) {
+  .featured-posts {
+    flex-direction: column;
+  }
 }
 </style>

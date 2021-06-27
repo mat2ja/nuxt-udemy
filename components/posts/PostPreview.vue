@@ -42,7 +42,6 @@ export default {
 
 <style scoped>
 .card {
-  min-width: 300px;
   max-width: 100%;
 }
 
