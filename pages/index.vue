@@ -19,35 +19,40 @@ export default {
   components: {
     PostList
   },
-  data () {
-    return {
-      loadedPosts: [
-        {
-          id: nanoid(6),
-          title: 'Orchestrator invoice Yen',
-          preview: 'Quod debitis consequatur animi alias accusamus.',
-          thumbnail: 'http://placekitten.com/601/400'
-        },
-        {
-          id: nanoid(6),
-          title: 'Grow Big',
-          preview: 'Voluptatibus nihil illo quia.',
-          thumbnail: 'http://placekitten.com/602/400'
-        },
-        {
-          id: nanoid(6),
-          title: 'Transmitter Brooks',
-          preview: 'Asperiores dicta aliquam.',
-          thumbnail: 'http://placekitten.com/603/400'
-        },
-        {
-          id: nanoid(6),
-          title: 'Brook Burg',
-          preview: 'Amet ipsam sint velit beatae optio.',
-          thumbnail: 'http://placekitten.com/604/400'
-        }
-      ]
-    }
+  // ucitava se na serveru (zbog SEO), nema pristup .this, moze biti samo na page komponentama,
+  // ne pokazujuje loader nego blocka rutu sve dok nije obavljeno
+  asyncData (context, callback) {
+    // eslint-disable-next-line nuxt/no-timing-in-fetch-data
+    setTimeout(() => {
+      callback(null, {
+        loadedPosts: [
+          {
+            id: nanoid(6),
+            title: 'Orchestrator invoice Yen',
+            preview: 'Quod debitis consequatur animi alias accusamus.',
+            thumbnail: 'http://placekitten.com/601/400'
+          },
+          {
+            id: nanoid(6),
+            title: 'Grow Big',
+            preview: 'Voluptatibus nihil illo quia.',
+            thumbnail: 'http://placekitten.com/602/400'
+          },
+          {
+            id: nanoid(6),
+            title: 'Transmitter Brooks',
+            preview: 'Asperiores dicta aliquam.',
+            thumbnail: 'http://placekitten.com/603/400'
+          },
+          {
+            id: nanoid(6),
+            title: 'Brook Burg',
+            preview: 'Amet ipsam sint velit beatae optio.',
+            thumbnail: 'http://placekitten.com/606/400'
+          }
+        ]
+      })
+    }, 1500)
   }
 }
 </script>
