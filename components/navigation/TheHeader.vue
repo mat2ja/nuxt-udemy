@@ -24,12 +24,12 @@
           </li>
           <li class="navbar-item">
             <nuxt-link to="/about" class="navbar-link">
-              Admin
+              About
             </nuxt-link>
           </li>
           <li class="navbar-item">
             <nuxt-link to="/admin" class="navbar-link">
-              About
+              Admin
             </nuxt-link>
           </li>
         </ul>
