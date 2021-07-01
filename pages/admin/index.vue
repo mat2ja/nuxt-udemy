@@ -9,7 +9,7 @@
       <h2 class="is-size-2 my-5">
         Existing posts
       </h2>
-      <PostList />
+      <PostList is-admin />
     </section>
   </div>
 </template>
