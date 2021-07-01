@@ -16,7 +16,7 @@
       Content
     </AppControlInput>
     <div class="mt-3">
-      <AppButton type="is-sucess">
+      <AppButton class="is-success">
         Save
       </AppButton>
       <AppButton

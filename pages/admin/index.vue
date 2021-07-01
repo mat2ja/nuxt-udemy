@@ -1,9 +1,9 @@
 <template>
   <div class="mt-4 p-5 container">
     <section class="new-post">
-      <button class="button is-info" @click="$router.push('/admin/new-post')">
+      <AppButton @click="$router.push('/admin/new-post')">
         Create Post
-      </button>
+      </AppButton>
     </section>
     <section class="existing-posts">
       <h2 class="is-size-2 my-5">
@@ -16,12 +16,13 @@
 
 <script>
 import PostList from '@/components/posts/PostList.vue'
+import AppButton from '@/components/UI/AppButton.vue'
 
 export default {
   components: {
-    PostList
+    PostList,
+    AppButton
   }
-
 }
 </script>
 
