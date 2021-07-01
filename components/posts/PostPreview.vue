@@ -8,8 +8,10 @@
       </div>
       <div class="card-content">
         <div class="content">
-          <h4>{{ title }}</h4>
-          <p>{{ previewText }}</p>
+          <h4 class="title is-3">
+            {{ title }}
+          </h4>
+          <p class="subtitle is-6 mt-2">{{ previewText }}</p>
         </div>
       </div>
     </div>

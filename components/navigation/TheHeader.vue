@@ -2,7 +2,7 @@
   <nav class="navbar is-black" role="navigation" aria-label="main navigation">
     <div class="container">
       <div class="navbar-brand">
-        <nuxt-link class="navbar-item" to="/">
+        <nuxt-link class="navbar-item has-text-primary is-italic is-family-sans-serif" to="/">
           🛵 wakasaki
         </nuxt-link>
 
@@ -12,8 +12,6 @@
           <span aria-hidden="true" />
         </a>
       </div>
-
-      <div class="navbar-divider" />
 
       <div id="navMenu" class="navbar-menu is-black">
         <ul class="navbar-end">
