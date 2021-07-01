@@ -21,41 +21,45 @@ export default {
   },
   // ucitava se na serveru (zbog SEO), nema pristup .this, moze biti samo na page komponentama,
   // ne pokazujuje loader nego blocka rutu sve dok nije obavljeno
-  asyncData (context, callback) {
-    console.log(context)
-    //* it loads first on the server only if were loading the page for the first time or we refreshed it
-    console.log('asyncData executed 🌌')
+  //* it loads first on the server only if were loading the page for the first time or we refreshed it
+  asyncData (context) {
+    return new Promise((resolve, reject) => {
+      // eslint-disable-next-line nuxt/no-timing-in-fetch-data
+      setTimeout(() => {
+        resolve({
+          loadedPosts: [
+            {
+              id: nanoid(6),
+              title: 'Orchestrator invoice Yen',
+              preview: 'Quod debitis consequatur animi alias accusamus.',
+              thumbnail: 'http://placekitten.com/601/400'
+            },
+            {
+              id: nanoid(6),
+              title: 'Grow Big',
+              preview: 'Voluptatibus nihil illo quia.',
+              thumbnail: 'http://placekitten.com/602/400'
+            },
+            {
+              id: nanoid(6),
+              title: 'Transmitter Brooks',
+              preview: 'Asperiores dicta aliquam.',
+              thumbnail: 'http://placekitten.com/603/400'
+            },
+            {
+              id: nanoid(6),
+              title: 'Brook Burg',
+              preview: 'Amet ipsam sint velit beatae optio.',
+              thumbnail: 'http://placekitten.com/606/400'
+            }
+          ]
+        })
+          .then((data) => { return data })
+          .catch(error => new Error(error))
+      }, 1500)
+    })
+
     // eslint-disable-next-line nuxt/no-timing-in-fetch-data
-    setTimeout(() => {
-      callback(null, {
-        loadedPosts: [
-          {
-            id: nanoid(6),
-            title: 'Orchestrator invoice Yen',
-            preview: 'Quod debitis consequatur animi alias accusamus.',
-            thumbnail: 'http://placekitten.com/601/400'
-          },
-          {
-            id: nanoid(6),
-            title: 'Grow Big',
-            preview: 'Voluptatibus nihil illo quia.',
-            thumbnail: 'http://placekitten.com/602/400'
-          },
-          {
-            id: nanoid(6),
-            title: 'Transmitter Brooks',
-            preview: 'Asperiores dicta aliquam.',
-            thumbnail: 'http://placekitten.com/603/400'
-          },
-          {
-            id: nanoid(6),
-            title: 'Brook Burg',
-            preview: 'Amet ipsam sint velit beatae optio.',
-            thumbnail: 'http://placekitten.com/606/400'
-          }
-        ]
-      })
-    }, 1500)
   }
 }
 </script>
