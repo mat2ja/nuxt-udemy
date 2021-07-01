@@ -1,114 +1,73 @@
 <template>
-  <div class="header-container">
-    <header class="the-header">
-      <TheSideNavToggle @toggle="$emit('sidenavToggle')" />
-      <div class="logo">
-        <nuxt-link to="/">
-          <em>wakasaki productions</em>
+  <nav class="navbar is-black" role="navigation" aria-label="main navigation">
+    <div class="container">
+      <div class="navbar-brand">
+        <nuxt-link class="navbar-item" to="/">
+          🛵 wakasaki
         </nuxt-link>
+
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navMenu">
+          <span aria-hidden="true" />
+          <span aria-hidden="true" />
+          <span aria-hidden="true" />
+        </a>
       </div>
-      <div class="spacer" />
-      <div class="navigation-items">
-        <ul class="nav-list">
-          <li class="nav-item">
-            <nuxt-link to="/posts">
+
+      <div class="navbar-divider" />
+
+      <div id="navMenu" class="navbar-menu is-black">
+        <ul class="navbar-end">
+          <li class="navbar-item">
+            <nuxt-link to="/posts" class="navbar-link">
               Blog
             </nuxt-link>
           </li>
-          <li class="nav-item">
-            <nuxt-link to="/about">
-              About
+          <li class="navbar-item">
+            <nuxt-link to="/about" class="navbar-link">
+              Admin
             </nuxt-link>
           </li>
-          <li class="nav-item">
-            <nuxt-link to="/admin">
-              Admin
+          <li class="navbar-item">
+            <nuxt-link to="/admin" class="navbar-link">
+              About
             </nuxt-link>
           </li>
         </ul>
       </div>
-    </header>
-  </div>
+    </div>
+  </nav>
 </template>
 
 <script>
-import TheSideNavToggle from '@/components/Navigation/TheSideNavToggle'
 
 export default {
   name: 'TheHeader',
-  components: {
-    TheSideNavToggle
+  mounted () {
+    // Get all "navbar-burger" elements
+    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0)
+
+    // Check if there are any navbar burgers
+    if ($navbarBurgers.length) {
+      $navbarBurgers.forEach((el) => {
+        el.addEventListener('click', () => {
+          // Get the target from the "data-target" attribute
+          const target = el.dataset.target
+          const $target = document.getElementById(target)
+
+          // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+          el.classList.toggle('is-active')
+          $target.classList.toggle('is-active')
+        })
+      })
+    }
   }
 }
 </script>
 
 <style scoped>
-.header-container {
-  height: 60px;
-}
-
-.the-header {
-  width: 100%;
-  position: fixed;
-  height: 60px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  background-color: black;
-  z-index: 100;
-  box-sizing: border-box;
-  padding: 0 20px;
-}
-
-.logo {
-  margin: 0 10px;
-  font-size: 1.3rem;
-}
-
-.logo a {
-  text-decoration: none;
-  color: white;
-}
-
-.spacer {
-  flex: 1;
-}
-
-.navigation-items {
-  display: none;
-}
-
-@media (min-width: 768px) {
-  .navigation-items {
-    display: block;
-  }
-}
-
-.nav-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-}
-
-.nav-item {
-  margin: 0 10px;
-}
-
-.nav-item a {
-  text-decoration: none;
-  color: white;
-  padding: .5rem 1.5rem;
-}
-
-.nav-item a:hover,
-.nav-item a:active {
-  color: goldenrod;
-}
-
-.nav-item a.nuxt-link-active {
-  background: rgba(218, 165, 32, 0.288);
-  color: goldenrod;
-  border-radius: 5px;
-}
+/* .navbar-link:hover,
+.navbar-link:active,
+.navbar-link.nuxt-link-active {
+  color: red;
+} */
 </style>
