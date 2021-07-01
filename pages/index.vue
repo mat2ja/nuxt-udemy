@@ -22,6 +22,7 @@ export default {
   // ucitava se na serveru (zbog SEO), nema pristup .this, moze biti samo na page komponentama,
   // ne pokazujuje loader nego blocka rutu sve dok nije obavljeno
   asyncData (context, callback) {
+    console.log(context)
     //* it loads first on the server only if were loading the page for the first time or we refreshed it
     console.log('asyncData executed 🌌')
     // eslint-disable-next-line nuxt/no-timing-in-fetch-data
