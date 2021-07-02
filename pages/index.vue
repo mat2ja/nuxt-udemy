@@ -23,38 +23,43 @@ export default {
   // ne pokazujuje loader nego blocka rutu sve dok nije obavljeno
   //* it loads first on the server only if were loading the page for the first time or we refreshed it
   async fetch (context) {
+    if (context.store.state.loadedPosts.length) {
+      return null
+    }
     try {
-      // eslint-disable-next-line nuxt/no-timing-in-fetch-data
-      const data = await setTimeout(() => {
-        return {
-          loadedPosts: [
-            {
-              id: nanoid(6),
-              title: 'Orchestrator Yen',
-              preview: 'Quod debitis consequatur accusamus.',
-              thumbnail: 'http://placekitten.com/601/400'
-            },
-            {
-              id: nanoid(6),
-              title: 'Grow Big',
-              preview: 'Voluptatibus nihil illo quia.',
-              thumbnail: 'http://placekitten.com/602/400'
-            },
-            {
-              id: nanoid(6),
-              title: 'Transmitter Brooks',
-              preview: 'Asperiores dicta aliquam.',
-              thumbnail: 'http://placekitten.com/603/400'
-            },
-            {
-              id: nanoid(6),
-              title: 'Brook Burg',
-              preview: 'Amet ipsam sint velit beatae optio.',
-              thumbnail: 'http://placekitten.com/606/400'
-            }
-          ]
-        }
-      }, 1000)
+      const data = await new Promise((resolve, reject) => {
+        // eslint-disable-next-line nuxt/no-timing-in-fetch-data
+        setTimeout(() => {
+          resolve({
+            loadedPosts: [
+              {
+                id: nanoid(6),
+                title: 'Orchestrator Yen',
+                preview: 'Quod debitis consequatur accusamus.',
+                thumbnail: 'http://placekitten.com/601/400'
+              },
+              {
+                id: nanoid(6),
+                title: 'Grow Big',
+                preview: 'Voluptatibus nihil illo quia.',
+                thumbnail: 'http://placekitten.com/602/400'
+              },
+              {
+                id: nanoid(6),
+                title: 'Transmitter Brooks',
+                preview: 'Asperiores dicta aliquam.',
+                thumbnail: 'http://placekitten.com/603/400'
+              },
+              {
+                id: nanoid(6),
+                title: 'Brook Burg',
+                preview: 'Amet ipsam sint velit beatae optio.',
+                thumbnail: 'http://placekitten.com/606/400'
+              }
+            ]
+          })
+        }, 1000)
+      })
       console.log('settng posts')
       context.store.commit('setPosts', data.loadedPosts)
     } catch (e) {
