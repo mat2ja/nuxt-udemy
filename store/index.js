@@ -3,7 +3,7 @@ export const state = () => ({
 })
 
 export const getters = {
-  posts: (state) => {
+  loadedPosts: (state) => {
     return state.loadedPosts
   }
 }

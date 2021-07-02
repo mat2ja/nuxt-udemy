@@ -58,14 +58,17 @@ export default {
       // reject(new Error())
     })
       .then((data) => {
-        return data
+        context.store.commit('setPosts', data.loadedPosts)
       })
       .catch((e) => {
         context.error(e)
       })
   },
-  created () {
-    this.$store.dispatch('setPosts', this.loadedPosts)
+  computed: {
+    loadedPosts () {
+      console.log(this.$store.getters.loadedPosts)
+      return this.$store.getters.loadedPosts
+    }
   }
 }
 </script>
