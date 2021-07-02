@@ -18,7 +18,6 @@ export const mutations = {
 
 export const actions = {
   nuxtServerInit (vuexContext, context) {
-    console.log('vuexContext :>> ', vuexContext)
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         // eslint-disable-next-line no-unused-expressions
