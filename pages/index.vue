@@ -22,11 +22,11 @@ export default {
   // ucitava se na serveru (zbog SEO), nema pristup .this, moze biti samo na page komponentama,
   // ne pokazujuje loader nego blocka rutu sve dok nije obavljeno
   //* it loads first on the server only if were loading the page for the first time or we refreshed it
-  fetch (context) {
-    return new Promise((resolve, reject) => {
+  async fetch (context) {
+    try {
       // eslint-disable-next-line nuxt/no-timing-in-fetch-data
-      setTimeout(() => {
-        resolve({
+      const data = await setTimeout(() => {
+        return {
           loadedPosts: [
             {
               id: nanoid(6),
@@ -53,17 +53,13 @@ export default {
               thumbnail: 'http://placekitten.com/606/400'
             }
           ]
-        })
+        }
       }, 1000)
-      // reject(new Error())
-    })
-      .then((data) => {
-        console.log('settng posts')
-        context.store.commit('setPosts', data.loadedPosts)
-      })
-      .catch((e) => {
-        context.error(e)
-      })
+      console.log('settng posts')
+      context.store.commit('setPosts', data.loadedPosts)
+    } catch (e) {
+      context.error(e)
+    }
   },
   computed: {
     loadedPosts () {
