@@ -22,7 +22,7 @@ export default {
   // ucitava se na serveru (zbog SEO), nema pristup .this, moze biti samo na page komponentama,
   // ne pokazujuje loader nego blocka rutu sve dok nije obavljeno
   //* it loads first on the server only if were loading the page for the first time or we refreshed it
-  asyncData (context) {
+  fetch (context) {
     return new Promise((resolve, reject) => {
       // eslint-disable-next-line nuxt/no-timing-in-fetch-data
       setTimeout(() => {
@@ -58,6 +58,7 @@ export default {
       // reject(new Error())
     })
       .then((data) => {
+        console.log('settng posts')
         context.store.commit('setPosts', data.loadedPosts)
       })
       .catch((e) => {
@@ -66,7 +67,6 @@ export default {
   },
   computed: {
     loadedPosts () {
-      console.log(this.$store.getters.loadedPosts)
       return this.$store.getters.loadedPosts
     }
   }
