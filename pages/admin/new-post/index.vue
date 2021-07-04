@@ -22,10 +22,14 @@ export default {
   methods: {
     async onSubmitted (postData) {
       const node = 'posts'
-      const res = await this.$axios.$post(`${this.dbUrl}/${node}.json`,
-        { ...postData, updatedDate: new Date() })
-        .catch(err => console.error('Error storing posts', err.message))
-      console.log(res)
+      try {
+        await this.$axios.$post(`${this.dbUrl}/${node}.json`,
+          { ...postData, updatedDate: new Date() }
+        )
+      } catch (error) {
+        console.error('Error storing posts', error)
+      }
+      this.$router.replace('/admin')
     }
   }
 }

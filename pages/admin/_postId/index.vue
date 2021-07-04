@@ -1,7 +1,7 @@
 <template>
   <div class="admin-post-page container p-3">
     <section class="update-form">
-      <AdminPostForm :post="loadedPost" />
+      <AdminPostForm :post="loadedPost" @submit="onSubmitted" />
     </section>
   </div>
 </template>
@@ -14,14 +14,35 @@ export default {
     AdminPostForm
   },
   layout: 'admin',
-  data () {
-    return {
-      loadedPost: {
-        author: 'Matija',
-        title: 'MC2 win',
-        thumbnailLink: 'http://placekitten.com/605/400',
-        content: 'Yet another stroke of genius'
+  async asyncData (ctx) {
+    const node = 'posts'
+    const id = ctx.params.postId
+    try {
+      const loadedPost = await ctx.$axios.$get(
+        `${ctx.store.state.baseFirebaseUrl}/${node}/${id}.json`
+      )
+      return { loadedPost }
+    } catch (error) {
+      console.error(ctx.error)
+    }
+  },
+  computed: {
+    dbUrl () {
+      return this.$store.state.baseFirebaseUrl
+    }
+  },
+  methods: {
+    async onSubmitted (editedPost) {
+      const node = 'posts'
+      const id = this.$route.params.postId
+      try {
+        await this.$axios.$put(`${this.dbUrl}/${node}/${id}.json`,
+          { ...editedPost, updatedDate: new Date() }
+        )
+      } catch (error) {
+        console.error('Error storing posts', error)
       }
+      this.$router.push('/admin')
     }
   }
 }
