@@ -1,7 +1,7 @@
 <template>
   <div class="admin-new-post-page container p-3">
     <section class="new-post-form">
-      <AdminPostForm />
+      <AdminPostForm @submit="onSubmitted" />
     </section>
   </div>
 </template>
@@ -13,6 +13,19 @@ export default {
   components: {
     AdminPostForm
   },
-  layout: 'admin'
+  layout: 'admin',
+  computed: {
+    dbUrl () {
+      return this.$store.state.baseFirebaseUrl
+    }
+  },
+  methods: {
+    async onSubmitted (postData) {
+      const node = 'posts'
+      const res = await this.$axios.$post(`${this.dbUrl}/${node}.json`, postData)
+        .catch(err => console.error('Error storing posts', err.message))
+      console.log(res)
+    }
+  }
 }
 </script>

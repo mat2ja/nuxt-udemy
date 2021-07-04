@@ -11,7 +11,9 @@
           <h4 class="title is-4">
             {{ title }}
           </h4>
-          <p class="subtitle is-6 mt-2">{{ previewText }}</p>
+          <p class="subtitle is-6 mt-2">
+            {{ previewText }}
+          </p>
         </div>
       </div>
     </div>
@@ -53,7 +55,8 @@ export default {
 
 <style scoped>
 .card {
-  max-width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
 }
 
 .image {

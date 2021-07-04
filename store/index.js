@@ -1,7 +1,7 @@
-import { nanoid } from 'nanoid'
-
+/* eslint-disable no-console */
 export const state = () => ({
-  loadedPosts: []
+  loadedPosts: [],
+  baseFirebaseUrl: 'https://nuxt-demo-blog-default-rtdb.europe-west1.firebasedatabase.app'
 })
 
 export const getters = {
@@ -17,41 +17,15 @@ export const mutations = {
 }
 
 export const actions = {
-  nuxtServerInit (vuexContext, context) {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        // eslint-disable-next-line no-unused-expressions
-        vuexContext.commit('setPosts', [
-          {
-            id: nanoid(6),
-            title: 'Orchestrator Yen',
-            preview: 'Quod debitis consequatur accusamus.',
-            thumbnail: 'http://placekitten.com/601/400'
-          },
-          {
-            id: nanoid(6),
-            title: 'Grow Big',
-            preview: 'Voluptatibus nihil illo quia.',
-            thumbnail: 'http://placekitten.com/602/400'
-          },
-          {
-            id: nanoid(6),
-            title: 'Transmitter Brooks',
-            preview: 'Asperiores dicta aliquam.',
-            thumbnail: 'http://placekitten.com/603/400'
-          },
-          {
-            id: nanoid(6),
-            title: 'Brook Burg',
-            preview: 'Amet ipsam sint velit beatae optio.',
-            thumbnail: 'http://placekitten.com/606/400'
-          }
-        ])
-        resolve()
-      }, 1000)
-    })
-  },
-  setPosts ({ commit }, posts) {
-    commit('setPosts', posts)
+  async nuxtServerInit ({ state, commit }, { $axios }) {
+    const node = 'posts'
+    const posts = await $axios.$get(`${state.baseFirebaseUrl}/${node}.json`)
+      .catch(e => console.error(e))
+    const postsArray = Object.entries(posts).reduce((array, [id, post]) => {
+      array.push({ ...post, id })
+      return array
+    }, [])
+    console.log(postsArray)
+    commit('setPosts', postsArray)
   }
 }
