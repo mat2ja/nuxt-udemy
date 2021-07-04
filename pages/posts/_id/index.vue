@@ -23,23 +23,17 @@
 </template>
 
 <script>
-import { nanoid } from 'nanoid'
 export default {
-  asyncData (context, callback) {
-    // eslint-disable-next-line nuxt/no-timing-in-fetch-data
-    setTimeout(() => {
-      callback(null, {
-        loadedPost: {
-          id: nanoid(6),
-          title: `ransmitter Brooks, (ID: ${context.params.id})`,
-          preview: 'Quod debitis consequatur animi alias accusamus.',
-          content: 'Quod debitis consequatur animi alias accusamus et id facilis dolor. Voluptatem recusandae hic et quod quisquam ullam rerum nesciunt. Voluptatem laboriosam voluptates cupiditate nihil. Ut voluptatem repellat itaque similique et impedit ab. Harum ut provident dolorem amet nesciunt non. Iste quo temporibus exercitationem nostrum et reiciendis voluptas. Nulla praesentium error eum maiores. Eos aliquid velit. Consectetur saepe molestiae dolorem et numquam. In inventore ut est ut delectus natus est aut. Sed a odio placeat qui et aspernatur asperiores dolores. Voluptatum voluptas in maiores blanditiis quia.',
-          thumbnail: 'http://placekitten.com/601/400',
-          updatedDate: new Date(),
-          author: 'Harrison Oberbrunner'
-        }
-      })
-    }, 1000)
+  async asyncData (ctx) {
+    const node = 'posts'
+    const id = ctx.params.id
+    try {
+      const loadedPost = await ctx.$axios.$get(`${ctx.store.state.baseFirebaseUrl}/${node}/${id}.json`)
+      console.log(loadedPost)
+      return { loadedPost }
+    } catch (error) {
+      console.error(ctx.error)
+    }
   }
 }
 </script>

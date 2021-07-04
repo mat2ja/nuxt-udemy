@@ -6,7 +6,7 @@
     <AppControlInput v-model="editedPost.title">
       Title
     </AppControlInput>
-    <AppControlInput v-model="editedPost.thumbnailLink">
+    <AppControlInput v-model="editedPost.thumbnail">
       Thumbnail Link
     </AppControlInput>
     <AppControlInput
@@ -14,6 +14,12 @@
       control-type="textarea"
     >
       Content
+    </AppControlInput>
+    <AppControlInput
+      v-model="editedPost.preview"
+      control-type="textarea"
+    >
+      Preview text
     </AppControlInput>
     <div class="mt-3">
       <AppButton class="is-success">
@@ -54,7 +60,8 @@ export default {
         : {
             author: '',
             title: '',
-            thumbnailLink: '',
+            thumbnail: '',
+            preview: '',
             content: ''
           }
     }
@@ -70,3 +77,10 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+form {
+  max-width: 500px;
+  margin: 0 auto;
+}
+</style>

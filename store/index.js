@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 export const state = () => ({
   loadedPosts: [],
   baseFirebaseUrl: 'https://nuxt-demo-blog-default-rtdb.europe-west1.firebasedatabase.app'
@@ -19,13 +18,20 @@ export const mutations = {
 export const actions = {
   async nuxtServerInit ({ state, commit }, { $axios }) {
     const node = 'posts'
-    const posts = await $axios.$get(`${state.baseFirebaseUrl}/${node}.json`)
-      .catch(e => console.error(e))
-    const postsArray = Object.entries(posts).reduce((array, [id, post]) => {
-      array.push({ ...post, id })
-      return array
-    }, [])
-    console.log(postsArray)
-    commit('setPosts', postsArray)
+    try {
+      const res = await $axios.get(`${state.baseFirebaseUrl}/${node}.json`)
+      const postsArray = Object.entries(res.data)
+        .reduce((arr, [id, post]) => {
+          arr.push({ ...post, id })
+          return arr
+        }, [])
+      commit('setPosts', postsArray)
+    } catch (error) {
+      console.error('Error fetching posts', error)
+      commit('setPosts', [])
+    }
+  },
+  setPosts ({ commit }, posts) {
+    commit('setPosts', posts)
   }
 }
