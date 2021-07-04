@@ -19,7 +19,7 @@ export default {
     const id = ctx.params.postId
     try {
       const loadedPost = await ctx.$axios.$get(
-        `${ctx.store.state.baseFirebaseUrl}/${node}/${id}.json`
+        `${ctx.store.state.dbUrl}/${node}/${id}.json`
       )
       return { loadedPost }
     } catch (error) {
@@ -28,20 +28,13 @@ export default {
   },
   computed: {
     dbUrl () {
-      return this.$store.state.baseFirebaseUrl
+      return this.$store.state.dbUrl
     }
   },
   methods: {
     async onSubmitted (editedPost) {
-      const node = 'posts'
       const id = this.$route.params.postId
-      try {
-        await this.$axios.$put(`${this.dbUrl}/${node}/${id}.json`,
-          { ...editedPost, updatedDate: new Date() }
-        )
-      } catch (error) {
-        console.error('Error storing posts', error)
-      }
+      await this.$store.dispatch('editPost', { ...editedPost, id })
       this.$router.push('/admin')
     }
   }

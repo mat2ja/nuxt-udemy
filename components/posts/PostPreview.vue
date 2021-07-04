@@ -57,9 +57,16 @@ export default {
 .card {
   max-width: 400px;
   margin: 0 auto;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.image {
+img {
+  height: 200px;
+  width: 100%;
   object-fit: cover;
+  object-position: center;
 }
 </style>

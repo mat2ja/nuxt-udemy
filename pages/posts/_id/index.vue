@@ -29,7 +29,7 @@ export default {
     const id = ctx.params.id
     try {
       const loadedPost = await ctx.$axios.$get(
-        `${ctx.store.state.baseFirebaseUrl}/${node}/${id}.json`)
+        `${ctx.store.state.dbUrl}/${node}/${id}.json`)
       console.log(loadedPost)
       return { loadedPost }
     } catch (error) {

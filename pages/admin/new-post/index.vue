@@ -16,19 +16,12 @@ export default {
   layout: 'admin',
   computed: {
     dbUrl () {
-      return this.$store.state.baseFirebaseUrl
+      return this.$store.state.dbUrl
     }
   },
   methods: {
     async onSubmitted (postData) {
-      const node = 'posts'
-      try {
-        await this.$axios.$post(`${this.dbUrl}/${node}.json`,
-          { ...postData, updatedDate: new Date() }
-        )
-      } catch (error) {
-        console.error('Error storing posts', error)
-      }
+      await this.$store.dispatch('addPost', postData)
       this.$router.replace('/admin')
     }
   }
