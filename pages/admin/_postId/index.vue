@@ -21,7 +21,7 @@ export default {
       const loadedPost = await ctx.$axios.$get(
         `${ctx.store.state.dbUrl}/${node}/${id}.json`
       )
-      return { loadedPost }
+      return { loadedPost: { ...loadedPost, id } }
     } catch (error) {
       console.error(ctx.error)
     }
@@ -33,8 +33,7 @@ export default {
   },
   methods: {
     async onSubmitted (editedPost) {
-      const id = this.$route.params.postId
-      await this.$store.dispatch('editPost', { ...editedPost, id })
+      await this.$store.dispatch('editPost', editedPost)
       this.$router.push('/admin')
     }
   }

@@ -30,7 +30,6 @@ export default {
     try {
       const loadedPost = await ctx.$axios.$get(
         `${ctx.store.state.dbUrl}/${node}/${id}.json`)
-      console.log(loadedPost)
       return { loadedPost }
     } catch (error) {
       console.error(ctx.error)

@@ -21,6 +21,7 @@ export default {
   },
   methods: {
     async onSubmitted (postData) {
+      // TODO: dont send id
       await this.$store.dispatch('addPost', postData)
       this.$router.replace('/admin')
     }

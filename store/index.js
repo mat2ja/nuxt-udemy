@@ -56,7 +56,7 @@ export const actions = {
   async editPost ({ state, commit }, post) {
     const editedPost = { ...post, updatedDate: new Date() }
     try {
-      await this.$axios.$put(`${state.dbUrl}/posts/${editedPost.id}.json`, editedPost)
+      await this.$axios.$put(`${state.dbUrl}/posts/${post.id}.json`, editedPost)
       commit('editPost', editedPost)
     } catch (error) {
       console.error('Error editing post', error)
