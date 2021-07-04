@@ -45,5 +45,21 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+  },
+
+  loading: {
+    color: '#26c6da',
+    height: '5px',
+    failedColor: '#ef5350'
+  },
+
+  // only for SPA
+  // loadingIndicator: {
+  //   name: 'circle',
+  //   color: '#26c6da'
+  // },
+
+  env: {
+    baseUrl: process.env.BASE_URL || 'https://nuxt-demo-blog-default-rtdb.europe-west1.firebasedatabase.app'
   }
 }

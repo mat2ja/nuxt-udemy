@@ -14,14 +14,8 @@ export default {
     AdminPostForm
   },
   layout: 'admin',
-  computed: {
-    dbUrl () {
-      return this.$store.state.dbUrl
-    }
-  },
   methods: {
     async onSubmitted (postData) {
-      // TODO: dont send id
       await this.$store.dispatch('addPost', postData)
       this.$router.replace('/admin')
     }

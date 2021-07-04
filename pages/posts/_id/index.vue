@@ -29,11 +29,14 @@ export default {
     const id = ctx.params.id
     try {
       const loadedPost = await ctx.$axios.$get(
-        `${ctx.store.state.dbUrl}/${node}/${id}.json`)
+        `${ctx.env.baseUrl}/${node}/${id}.json`)
       return { loadedPost }
     } catch (error) {
       console.error(ctx.error)
     }
+  },
+  head: {
+    title: 'A blog post'
   }
 }
 </script>

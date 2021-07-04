@@ -19,16 +19,11 @@ export default {
     const id = ctx.params.postId
     try {
       const loadedPost = await ctx.$axios.$get(
-        `${ctx.store.state.dbUrl}/${node}/${id}.json`
+        `${ctx.env.baseUrl}/${node}/${id}.json`
       )
       return { loadedPost: { ...loadedPost, id } }
     } catch (error) {
       console.error(ctx.error)
-    }
-  },
-  computed: {
-    dbUrl () {
-      return this.$store.state.dbUrl
     }
   },
   methods: {

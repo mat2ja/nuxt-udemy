@@ -1,8 +1,11 @@
 <template>
   <div class="mt-4 p-5 container">
     <section class="new-post">
-      <AppButton @click="$router.push('/admin/new-post')">
+      <AppButton class="mr-2 is-primary" @click="$router.push('/admin/new-post')">
         Create Post
+      </AppButton>
+      <AppButton @click="$router.push('/')">
+        Go home
       </AppButton>
     </section>
     <section class="existing-posts">
