@@ -47,7 +47,8 @@ export default {
   ],
 
   axios: {
-    baseURL: process.env.BASE_URL || 'https://nuxt-demo-blog-default-rtdb.europe-west1.firebasedatabase.app'
+    baseURL: process.env.BASE_URL || 'https://nuxt-demo-blog-default-rtdb.europe-west1.firebasedatabase.app',
+    credentials: false
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
