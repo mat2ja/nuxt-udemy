@@ -68,7 +68,8 @@ export default {
   // },
 
   env: {
-    baseUrl: process.env.BASE_URL || 'https://nuxt-demo-blog-default-rtdb.europe-west1.firebasedatabase.app'
+    baseUrl: process.env.BASE_URL || 'https://nuxt-demo-blog-default-rtdb.europe-west1.firebasedatabase.app',
+    fbAPIKey: process.env.API_KEY || 'AIzaSyBGdLoeEuyTrATcsGpTBQf0mj0nzC4UcEc'
   },
 
   pageTransition: {

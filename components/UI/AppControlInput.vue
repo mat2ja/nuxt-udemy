@@ -4,7 +4,7 @@
     <input
       v-if="controlType === 'input'"
       class="input"
-      type="text"
+      :type="type"
       v-bind="$attrs"
       :value="value"
       @input="$emit('input', $event.target.value)"
@@ -30,6 +30,11 @@ export default {
     value: {
       type: String,
       default: ''
+    },
+    type: {
+      type: String,
+      default: 'text',
+      required: false
     }
   }
 }
