@@ -1,7 +1,6 @@
 /* eslint-disable no-console */
 export const state = () => ({
-  loadedPosts: [],
-  dbUrl: 'https://nuxt-demo-blog-default-rtdb.europe-west1.firebasedatabase.app'
+  loadedPosts: []
 })
 
 export const getters = {
@@ -27,9 +26,8 @@ export const mutations = {
 
 export const actions = {
   async nuxtServerInit ({ commit }, { $axios, env }) {
-    const node = 'posts'
     try {
-      const res = await $axios.get(`${env.baseUrl}/${node}.json`)
+      const res = await $axios.get('/posts.json')
       const postsArray = Object.entries(res.data)
         .reduce((arr, [id, post]) => {
           arr.push({ ...post, id })
@@ -47,7 +45,7 @@ export const actions = {
   async addPost ({ commit }, post) {
     const createdPost = { ...post, updatedDate: new Date() }
     try {
-      const { name: id } = await this.$axios.$post(`${process.env.baseUrl}/posts.json`, createdPost)
+      const { name: id } = await this.$axios.$post('/posts.json', createdPost)
       commit('addPost', { ...createdPost, id })
     } catch (error) {
       console.error('Error storing post', error)
@@ -56,7 +54,7 @@ export const actions = {
   async editPost ({ commit }, post) {
     const editedPost = { ...post, updatedDate: new Date() }
     try {
-      await this.$axios.$put(`${process.env.baseUrl}/posts/${post.id}.json`, editedPost)
+      await this.$axios.$put(`/posts/${post.id}.json`, editedPost)
       commit('editPost', editedPost)
     } catch (error) {
       console.error('Error editing post', error)
