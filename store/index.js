@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 export const state = () => ({
-  loadedPosts: []
+  loadedPosts: [],
+  token: null
 })
 
 export const getters = {
@@ -21,6 +22,10 @@ export const mutations = {
     if (postIdx !== -1) {
       state.loadedPosts[postIdx] = editedPost
     }
+  },
+  setToken (state, token) {
+    state.token = token
+    console.log('TOKEN :>> ', token)
   }
 }
 
@@ -58,6 +63,23 @@ export const actions = {
       commit('editPost', editedPost)
     } catch (error) {
       console.error('Error editing post', error)
+    }
+  },
+  async authenticateUser ({ commit }, authData) {
+    const url = authData.isLogin
+      ? `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.fbAPIKey}`
+      : `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.fbAPIKey}`
+
+    try {
+      const result = await this.$axios.$post(url, {
+        email: authData.email,
+        password: authData.password,
+        returnSecureToken: true
+      })
+      commit('setToken', result.idToken)
+      return result
+    } catch (error) {
+      console.error(error.message)
     }
   }
 }

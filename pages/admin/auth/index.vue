@@ -38,26 +38,20 @@ export default {
   },
   methods: {
     async onSubmit () {
-      try {
-        if (!this.validateEmail(this.email) || !this.validatePassword(this.password)) {
-          throw new Error('Invalid email and/or password!')
-        }
-        const url = this.isLogin
-          ? `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.fbAPIKey}`
-          : `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.fbAPIKey}`
-
-        const result = await this.$axios.$post(url, {
-          email: this.email,
-          password: this.password,
-          returnSecureToken: true
-        })
-        console.log(result)
-      } catch (error) {
-        console.error(error.message)
+      if (!this.validateEmail(this.email) || !this.validatePassword(this.password)) {
+        console.error('Invalid email and/or password!')
+        return
       }
+      // eslint-disable-next-line no-unused-vars
+      const response = await this.$store.dispatch('authenticateUser', {
+        isLogin: this.isLogin,
+        email: this.email,
+        password: this.password
+      })
+      this.$router.push('/admin')
     },
     validateEmail (email) {
-      // eslint-disable-next-line no-useless-escape
+    // eslint-disable-next-line no-useless-escape
       const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       return re.test(email)
     },
